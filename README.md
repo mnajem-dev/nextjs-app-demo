@@ -2,21 +2,41 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment (optional)
+
+Posts are fetched from an external API. By default this is
+`https://jsonplaceholder.typicode.com`, but you can override it with an env var.
+
+1. Copy the example env file:
+
+	```bash
+	cp .env.local.example .env.local
+	```
+
+2. Edit `.env.local` and adjust `API_BASE_URL` if you have your own backend.
+
+### 3. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## App Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `app/layout.js` – root layout, global navigation and metadata.
+- `app/page.js` – home page with links to posts and articles.
+- `app/posts` – list and detail pages for posts fetched from the external API.
+- `app/articles` – in-project articles with list, detail, and featured views.
+- `app/lib/posts.js` – helpers for fetching posts.
+- `app/lib/articles.js` – in-memory articles data and helpers.
 
 ## Learn More
 
@@ -29,8 +49,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the
+[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+When deploying, remember to set `API_BASE_URL` in your Vercel project if you
+use a custom backend.
 
-the link to the site https://nextjs-app-demo-lyart.vercel.app/
+Live demo: https://nextjs-app-demo-lyart.vercel.app/
+

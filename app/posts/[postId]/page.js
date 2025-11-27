@@ -1,5 +1,22 @@
-import PostDetails from "@/app/components/postDetails";
 import { Suspense } from "react";
+import PostDetails from "@/app/components/postDetails";
+import { fetchPostById } from "@/app/lib/posts";
+
+export async function generateMetadata({ params }) {
+	const post = await fetchPostById(params.postId);
+
+	if (!post) {
+		return {
+			title: "Post not found | NextJS App Demo",
+		};
+	}
+
+	return {
+		title: `${post.title} | NextJS App Demo`,
+		description: post.body,
+	};
+}
+
 export default async function PostDetailsPage({ params }) {
 	const postId = params.postId;
 
@@ -18,3 +35,4 @@ export default async function PostDetailsPage({ params }) {
 		</div>
 	);
 }
+

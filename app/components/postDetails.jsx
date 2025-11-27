@@ -1,18 +1,12 @@
+import { notFound } from "next/navigation";
+import { fetchPostById } from "../lib/posts";
+
 export default async function PostDetails({ postId }) {
-	await new Promise((resolve) => {
-		setTimeout(() => {
-			resolve();
-		}, 2000);
-	});
-	const response = await fetch(
-		`https://jsonplaceholder.typicode.com/posts/${postId}`,
-		{
-			next: {
-				revalidate: 120,
-			},
-		}
-	);
-	const post = await response.json();
+	const post = await fetchPostById(postId);
+
+	if (!post) {
+		notFound();
+	}
 
 	return (
 		<div>

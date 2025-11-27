@@ -1,13 +1,34 @@
 import Link from "next/link";
+import { getArticles } from "../lib/articles";
 
 export default function ArticlesPage() {
+	const articles = getArticles();
+
 	return (
 		<div>
-			<h3>Articles Page</h3>
-
-			<Link href="/posts">
-				<button>Take me to the posts page</button>
-			</Link>
+			<h2>All Articles</h2>
+			<ul style={{ listStyle: "none", padding: 0, marginTop: "16px" }}>
+				{articles.map((article) => (
+					<li key={article.id} style={{ marginBottom: "12px" }}>
+						<Link href={`/articles/${article.slug}`}>
+							<div
+								style={{
+									background: "white",
+									color: "black",
+									padding: "12px 16px",
+									borderRadius: "8px",
+								}}
+							>
+								<h3>{article.title}</h3>
+								<p style={{ marginTop: "4px", opacity: 0.9 }}>
+									{article.summary}
+								</p>
+							</div>
+						</Link>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
+
